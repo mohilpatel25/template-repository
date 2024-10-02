@@ -23,6 +23,7 @@ class TestExample:
             ((), {"A": "A"}, 1),
             (("A", "B"), {"a": "a"}, 3),
             (("A", "B"), {}, 2),
+            (("A", "B", 25, 15), {"name": "username"}, 5),
         ],
     )
     def test_function(self, args: Any, kwargs: Any, expected_num_args: int) -> None:
