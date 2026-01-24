@@ -8,11 +8,10 @@ from src import example
 
 
 class TestExample:
-    """Testcases for Example class"""
+    """Testcases for Example class."""
 
     def test_init(self) -> None:
         """Test init."""
-
         obj = example.Example("test_variable")
         assert obj.variable == "test_variable"
 
@@ -27,7 +26,6 @@ class TestExample:
     )
     def test_function(self, args: Any, kwargs: Any, expected_num_args: int) -> None:
         """Test function."""
-
         obj = example.Example()
         num_args = obj.function(*args, **kwargs)
         assert num_args == expected_num_args

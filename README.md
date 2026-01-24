@@ -1,63 +1,59 @@
-# Template Repository with pre-commit checks and GitHub Actions
+# Template Repository
 
-This repository serves as a template for creating new repositories with integrated pre-commit hooks and GitHub Actions. The setup ensures consistent code quality by enforcing pre-commit checks and running tests automatically when a pull request (PR) is made to the `main` branch.
+This repository serves as a template for creating new Python repositories with modern tooling. It is configured with `uv` for dependency management and `ruff` for linting/formatting.
 
 ## Features
 
-- **Pre-commit Hooks**: Automatically check code before commits are accepted.
-- **GitHub Actions Integration**: Automatically runs:
-  - Pre-commit checks on every PR.
-  - Test suite to validate code changes.
+- **Dependency Management**: Uses `uv` for fast package management.
+- **Linting & Formatting**: configured with `ruff`.
+- **Testing**: `pytest` with coverage reports.
+- **Helper Scripts**:
+    - `bin/lint`: Runs formatters and linters.
+    - `bin/ci`: Runs the full CI suite (lint + tests).
+- **GitHub Actions**: integrated CI pipeline.
 
 ## Setup Instructions
 
-### 1. Clone the repository
+### 1. Install uv
+
+Follow the [official installation guide](https://github.com/astral-sh/uv?tab=readme-ov-file#installation) to install `uv`.
+
+### 2. Clone the repository
 
 ```bash
 git clone https://github.com/mohilpatel25/template-repository.git
 cd template-repository
 ```
 
-### 2. Install Pre-commit
-
-To enable pre-commit checks locally, install the `pre-commit` package and set it up:
+### 3. Install Dependencies
 
 ```bash
-pip install pre-commit
-pre-commit install
+uv sync
 ```
 
-This will ensure pre-commit hooks are executed every time you make a commit.
+## Development
 
-### 3. Modify as a Template
+### Running Tests and Linting
 
-Once cloned, you can use this repository as a template for new projects. Modify the code, tests, or add new pre-commit hooks based on your project requirements.
+We provide helper scripts to make development easier:
 
-### 4. Run Pre-commit Manually
+- **Run all checks (Lint + Test)**:
+  ```bash
+  ./bin/ci
+  ```
 
-You can manually run pre-commit hooks at any time by executing:
+- **Run Linting only**:
+  ```bash
+  ./bin/lint
+  ```
 
-```bash
-pre-commit run --all-files
-```
+- **Run Tests manually**:
+  ```bash
+  uv run pytest
+  ```
 
-### 5. GitHub Actions Workflow
+## Customization
 
-The repository includes a GitHub Actions workflow located in `.github/workflows/ci.yml`. This workflow:
-
-- Runs pre-commit checks automatically on all PRs targeting the `main` branch.
-- Runs tests to ensure code integrity.
-
-Ensure your test suite is properly set up and modify the workflow to suit your project needs.
-
-## Customizing Pre-commit Hooks
-
-Pre-commit hooks are configured in the `.pre-commit-config.yaml` file. To add or remove hooks, modify this file and run:
-
-```bash
-pre-commit autoupdate
-```
-
-## Customizing GitHub Actions
-
-Update the `.github/workflows/ci.yml` file to make changes to the actions.
+- **Dependencies**: Add new dependencies using `uv add <package>`.
+- **CI/CD**: Modify `.github/workflows/ci.yml` to adjust the pipeline.
+- **Tools**: Configure tools in `pyproject.toml`.
